@@ -28,3 +28,14 @@ Structure du Git Aelyth :
 
 -> src
         Dossier contenant toutes les sources decompilees par MCP (ModLoader inclus) + les sources du mods
+        
+        
+        
+        
+        
+ATTENTION :
+
+Les fichiers de textures .png ne sont pas fait, mais pour certain blocs, le code pour la texture n'est pas fait, voici les blocs :
+
+BlockObliviousGrass
+BlockObliviousLog

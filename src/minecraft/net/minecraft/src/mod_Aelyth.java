@@ -43,7 +43,7 @@ public class mod_Aelyth extends BaseMod
 		ModLoader.AddName(ObliviousWood, "Oblivious Wood");
 		ModLoader.AddName(ObliviousStone, "Oblivious Stone");
 		ModLoader.AddName(ObliviousCobble, "Oblivious Cobblestone");
-	    ModLoader.AddName(ObliviousCobble, "Oblivious Sand");
+	    ModLoader.AddName(ObliviousSand, "Oblivious Sand");
 	    ModLoader.AddName(DestroyedStone, "Destroyed Stone");
 	}
 	
