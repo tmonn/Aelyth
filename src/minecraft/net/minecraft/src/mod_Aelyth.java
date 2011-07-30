@@ -11,11 +11,12 @@ public class mod_Aelyth extends BaseMod
 	public static int ObliviousCobbleTexture;
     public static int ObliviousSandTexture;
     public static int DestroyedStoneTexture;
+    public static int ObliviousStickTexture;
 
 	public mod_Aelyth()
 	{
 		RegisterBlock();
-		setupBlockName();
+		setupName();
 		setupTexture();
 	}
 	
@@ -35,7 +36,7 @@ public class mod_Aelyth extends BaseMod
 	
 	
 	
-	public void setupBlockName()
+	public void setupName()
 	{
 		ModLoader.AddName(ObliviousDirt, "Oblivious Dirt");
 		ModLoader.AddName(ObliviousGrass, "Oblivious Grass");
@@ -45,6 +46,8 @@ public class mod_Aelyth extends BaseMod
 		ModLoader.AddName(ObliviousCobble, "Oblivious Cobblestone");
 	    ModLoader.AddName(ObliviousSand, "Oblivious Sand");
 	    ModLoader.AddName(DestroyedStone, "Destroyed Stone");
+	    ModLoader.AddName(ObliviousStick, "Oblivious Stick");
+	    
 	}
 	
 	
@@ -59,6 +62,7 @@ public class mod_Aelyth extends BaseMod
 		ObliviousCobbleTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousCobble.png");
 		ObliviousSandTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousSand.png");
 		DestroyedStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/DestroyedStone.png");
+		ObliviousStickTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousStickTexture.png");
 		
 	}
 	
@@ -66,7 +70,10 @@ public class mod_Aelyth extends BaseMod
 	
 	public void AddRecipe()
 	{
-		
+		ModLoader.AddRecipe(new ItemStack(ObliviousWood, 4), new Object[]
+				{"#", Character.valueOf('#'), ObliviousLog});
+		ModLoader.AddRecipe(new ItemStack(ObliviousStick, 2), new Object[]
+				{"#", "#", Character.valueOf('#'), ObliviousWood});
 	}
 	
 	
@@ -114,7 +121,11 @@ public class mod_Aelyth extends BaseMod
 													.setHardness(1.8F)
 													.setResistance(8F)
 													.setStepSound(Block.soundStoneFootstep)
-													.setBlockName("destroyedstone");														
+													.setBlockName("destroyedstone");
+	
+	
+	
+	public static Item ObliviousStick = (new ItemObliviousStick(5000)).setIconIndex(ObliviousStickTexture).setItemName("obliviousstick");
 	
 	
 	

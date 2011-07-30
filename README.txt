@@ -39,3 +39,8 @@ Les fichiers de textures .png ne sont pas fait, mais pour certain blocs, le code
 
 BlockObliviousGrass
 BlockObliviousLog
+
+
+Idée de biome :
+
+Biome de foret avec des arbres sans feuilles
