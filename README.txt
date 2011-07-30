@@ -44,3 +44,5 @@ BlockObliviousLog
 Idée de biome :
 
 Biome de foret avec des arbres sans feuilles
+
+Si vous avez des idées, ajoutez les !
