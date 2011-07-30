@@ -9,6 +9,8 @@ public class mod_Aelyth extends BaseMod
 	public static int ObliviousWoodTexture;
 	public static int ObliviousStoneTexture;
 	public static int ObliviousCobbleTexture;
+    public static int ObliviousSandTexture;
+    public static int DestroyedStoneTexture;
 
 	public mod_Aelyth()
 	{
@@ -27,6 +29,8 @@ public class mod_Aelyth extends BaseMod
 		ModLoader.RegisterBlock(ObliviousWood);
 		ModLoader.RegisterBlock(ObliviousStone);
 		ModLoader.RegisterBlock(ObliviousCobble);
+		ModLoader.RegisterBlock(ObliviousSand);
+		ModLoader.RegisterBlock(DestroyedStone);
 	}
 	
 	
@@ -39,6 +43,8 @@ public class mod_Aelyth extends BaseMod
 		ModLoader.AddName(ObliviousWood, "Oblivious Wood");
 		ModLoader.AddName(ObliviousStone, "Oblivious Stone");
 		ModLoader.AddName(ObliviousCobble, "Oblivious Cobblestone");
+	    ModLoader.AddName(ObliviousCobble, "Oblivious Sand");
+	    ModLoader.AddName(DestroyedStone, "Destroyed Stone");
 	}
 	
 	
@@ -51,6 +57,9 @@ public class mod_Aelyth extends BaseMod
 		ObliviousWoodTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousWood.png");
 		ObliviousStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousStone.png");
 		ObliviousCobbleTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousCobble.png");
+		ObliviousSandTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousSand.png");
+		DestroyedStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/DestroyedStone.png");
+		
 	}
 	
 	
@@ -94,12 +103,24 @@ public class mod_Aelyth extends BaseMod
 													.setResistance(8F)
 													.setStepSound(Block.soundStoneFootstep)
 													.setBlockName("obliviouscobble");
+													
+	public static final Block ObliviousSand = (new BlockObliviousSand(106, ObliviousSandTexture))
+													.setHardness(0.5F)
+													.setResistance(8F)
+													.setStepSound(Block.soundSandFootstep)
+													.setBlockName("oblivioussand");	
+
+	public static final Block DestroyedStone = (new BlockDestroyedStone(107, DestroyedStoneTexture))
+													.setHardness(1.8F)
+													.setResistance(8F)
+													.setStepSound(Block.soundStoneFootstep)
+													.setBlockName("destroyedstone");														
 	
 	
 	
 	public String Version()
 	{
-		return "En developpement ..";
+		return "En developpement ...";
 	}
 
 }
