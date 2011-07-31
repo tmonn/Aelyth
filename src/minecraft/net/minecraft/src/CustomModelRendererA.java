@@ -33,7 +33,7 @@ public class CustomModelRendererA
     public void addBox(float f, float f1, float f2, int i, int j, int k, float f3)
     {
         corners = new PositionTextureVertex[8];
-        faces = new CustomTexturedQuadP[6];
+        faces = new CustomTexturedQuadA[6];
         float f4 = f + (float)i;
         float f5 = f1 + (float)j;
         float f6 = f2 + (float)k;
@@ -65,22 +65,22 @@ public class CustomModelRendererA
         corners[5] = positiontexturevertex5;
         corners[6] = positiontexturevertex6;
         corners[7] = positiontexturevertex7;
-        faces[0] = new CustomTexturedQuadP(new PositionTextureVertex[] {
+        faces[0] = new CustomTexturedQuadA(new PositionTextureVertex[] {
             positiontexturevertex5, positiontexturevertex1, positiontexturevertex2, positiontexturevertex6
         }, textureOffsetX + k + i, textureOffsetY + k, textureOffsetX + k + i + k, textureOffsetY + k + j, texWidth, texHeight);
-        faces[1] = new CustomTexturedQuadP(new PositionTextureVertex[] {
+        faces[1] = new CustomTexturedQuadA(new PositionTextureVertex[] {
             positiontexturevertex, positiontexturevertex4, positiontexturevertex7, positiontexturevertex3
         }, textureOffsetX + 0, textureOffsetY + k, textureOffsetX + k, textureOffsetY + k + j, texWidth, texHeight);
-        faces[2] = new CustomTexturedQuadP(new PositionTextureVertex[] {
+        faces[2] = new CustomTexturedQuadA(new PositionTextureVertex[] {
             positiontexturevertex5, positiontexturevertex4, positiontexturevertex, positiontexturevertex1
         }, textureOffsetX + k, textureOffsetY + 0, textureOffsetX + k + i, textureOffsetY + k, texWidth, texHeight);
-        faces[3] = new CustomTexturedQuadP(new PositionTextureVertex[] {
+        faces[3] = new CustomTexturedQuadA(new PositionTextureVertex[] {
             positiontexturevertex2, positiontexturevertex3, positiontexturevertex7, positiontexturevertex6
         }, textureOffsetX + k + i, textureOffsetY + 0, textureOffsetX + k + i + i, textureOffsetY + k, texWidth, texHeight);
-        faces[4] = new CustomTexturedQuadP(new PositionTextureVertex[] {
+        faces[4] = new CustomTexturedQuadA(new PositionTextureVertex[] {
             positiontexturevertex1, positiontexturevertex, positiontexturevertex3, positiontexturevertex2
         }, textureOffsetX + k, textureOffsetY + k, textureOffsetX + k + i, textureOffsetY + k + j, texWidth, texHeight);
-        faces[5] = new CustomTexturedQuadP(new PositionTextureVertex[] {
+        faces[5] = new CustomTexturedQuadA(new PositionTextureVertex[] {
             positiontexturevertex4, positiontexturevertex5, positiontexturevertex6, positiontexturevertex7
         }, textureOffsetX + k + i + k, textureOffsetY + k, textureOffsetX + k + i + k + i, textureOffsetY + k + j, texWidth, texHeight);
         if(mirror)
@@ -195,7 +195,7 @@ public class CustomModelRendererA
     }
 
     private PositionTextureVertex corners[];
-    private CustomTexturedQuadP faces[];
+    private CustomTexturedQuadA faces[];
     private int textureOffsetX;
     private int textureOffsetY;
     public float offsetX;

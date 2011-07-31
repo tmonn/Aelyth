@@ -18,6 +18,7 @@ public class mod_Aelyth extends BaseMod
 		RegisterBlock();
 		setupName();
 		setupTexture();
+		AddRecipe();
 	}
 	
 	
@@ -72,6 +73,7 @@ public class mod_Aelyth extends BaseMod
 	{
 		ModLoader.AddRecipe(new ItemStack(ObliviousWood, 4), new Object[]
 				{"#", Character.valueOf('#'), ObliviousLog});
+		
 		ModLoader.AddRecipe(new ItemStack(ObliviousStick, 2), new Object[]
 				{"#", "#", Character.valueOf('#'), ObliviousWood});
 	}
