@@ -41,8 +41,15 @@ BlockObliviousGrass
 BlockObliviousLog
 
 
-Idée de biome :
+Idee de biome :
 
 Biome de foret avec des arbres sans feuilles
 
-Si vous avez des idées, ajoutez les !
+Si vous avez des idees, ajoutez les !
+
+
+
+ID Aelyth :
+
+Les IDs des blocs commencent a 100.
+Les IDs des itels commencent a 5000.
