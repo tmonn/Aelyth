@@ -55,7 +55,7 @@ public class mod_Aelyth extends BaseMod
 	
 	public void setupTexture()
 	{
-		ObliviousDirtTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousDirt.png");
+		/*ObliviousDirtTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousDirt.png");
 		ObliviousGrassTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousGrass.png");
 		ObliviousLogTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousLog.png");
 		ObliviousWoodTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousWood.png");
@@ -64,7 +64,7 @@ public class mod_Aelyth extends BaseMod
 		ObliviousSandTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousSand.png");
 		DestroyedStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/DestroyedStone.png");
 		ObliviousStickTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousStickTexture.png");
-		
+		*/
 	}
 	
 	
@@ -76,6 +76,9 @@ public class mod_Aelyth extends BaseMod
 		
 		ModLoader.AddRecipe(new ItemStack(ObliviousStick, 2), new Object[]
 				{"#", "#", Character.valueOf('#'), ObliviousWood});
+		
+		ModLoader.AddRecipe(new ItemStack(testPortail, 1), new Object[]
+		        {"#", Character.valueOf('#'), Block.dirt});
 	}
 	
 	
@@ -129,7 +132,7 @@ public class mod_Aelyth extends BaseMod
 	
 	public static Item ObliviousStick = (new ItemObliviousStick(5000)).setIconIndex(ObliviousStickTexture).setItemName("obliviousstick");
 	
-	
+	public static Item testPortail = (new ItemTestPortail(5001)).setIconCoord(0, 0).setItemName("testPoratil");
 	
 	public String Version()
 	{
