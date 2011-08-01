@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import java.util.Random;
+
 public class mod_Aelyth extends BaseMod
 {
 	
@@ -55,7 +57,7 @@ public class mod_Aelyth extends BaseMod
 	
 	public void setupTexture()
 	{
-		ObliviousDirtTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousDirt.png");
+		/*ObliviousDirtTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousDirt.png");
 		ObliviousGrassTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousGrass.png");
 		ObliviousLogTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousLog.png");
 		ObliviousWoodTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousWood.png");
@@ -64,7 +66,7 @@ public class mod_Aelyth extends BaseMod
 		ObliviousSandTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousSand.png");
 		DestroyedStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/DestroyedStone.png");
 		ObliviousStickTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousStickTexture.png");
-		
+		*/
 	}
 	
 	
@@ -78,6 +80,13 @@ public class mod_Aelyth extends BaseMod
 				{"#", "#", Character.valueOf('#'), ObliviousWood});
 	}
 	
+	public void GenerateSurface(World world, Random rand, int chunkX, int chunkZ)
+	{
+	    int randPosX = chunkX + rand.nextInt(16);
+	    int randPosY = rand.nextInt(20) + 70;
+	    int randPosZ = chunkZ + rand.nextInt(16);
+	    (new WorldGenShard()).generate(world, rand, randPosX, randPosY, randPosZ);
+	}
 	
 	
 	public static final Block ObliviousDirt = (new BlockObliviousDirt(100, ObliviousDirtTexture))
@@ -128,8 +137,6 @@ public class mod_Aelyth extends BaseMod
 	
 	
 	public static Item ObliviousStick = (new ItemObliviousStick(5000)).setIconIndex(ObliviousStickTexture).setItemName("obliviousstick");
-	
-	
 	
 	public String Version()
 	{
