@@ -2,10 +2,10 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class BlockObliviousCobble extends Block
+public class BlockAelythStone extends Block
 {
 	
-    public BlockObliviousCobble(int i, int j)
+    public BlockAelythStone(int i, int j)
     {
         super(i, j, Material.rock);
     }
@@ -13,7 +13,6 @@ public class BlockObliviousCobble extends Block
     
     public int idDropped(int i, Random random)
     {
-        return mod_Aelyth.ObliviousCobble.blockID;
+        return mod_Aelyth.AelythCobble.blockID;
     }
-    
 }

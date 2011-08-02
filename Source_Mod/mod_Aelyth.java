@@ -1,36 +1,39 @@
 package net.minecraft.src;
 
+import java.util.Random;
+
 public class mod_Aelyth extends BaseMod
 {
 	
-	public static int ObliviousDirtTexture;
-	public static int ObliviousGrassTexture;
-	public static int ObliviousLogTexture;
-	public static int ObliviousWoodTexture;
-	public static int ObliviousStoneTexture;
-	public static int ObliviousCobbleTexture;
-    public static int ObliviousSandTexture;
+	public static int AelythDirtTexture;
+	public static int AelythGrassTexture;
+	public static int AelythLogTexture;
+	public static int AelythWoodTexture;
+	public static int AelythStoneTexture;
+	public static int AelythCobbleTexture;
+    public static int AelythSandTexture;
     public static int DestroyedStoneTexture;
-    public static int ObliviousStickTexture;
+    public static int AelythStickTexture;
 
 	public mod_Aelyth()
 	{
 		RegisterBlock();
 		setupName();
 		setupTexture();
+		AddRecipe();
 	}
 	
 	
 	
 	public void RegisterBlock()
 	{
-		ModLoader.RegisterBlock(ObliviousDirt);
-		ModLoader.RegisterBlock(ObliviousGrass);
-		ModLoader.RegisterBlock(ObliviousLog);
-		ModLoader.RegisterBlock(ObliviousWood);
-		ModLoader.RegisterBlock(ObliviousStone);
-		ModLoader.RegisterBlock(ObliviousCobble);
-		ModLoader.RegisterBlock(ObliviousSand);
+		ModLoader.RegisterBlock(AelythDirt);
+		ModLoader.RegisterBlock(AelythGrass);
+		ModLoader.RegisterBlock(AelythLog);
+		ModLoader.RegisterBlock(AelythWood);
+		ModLoader.RegisterBlock(AelythStone);
+		ModLoader.RegisterBlock(AelythCobble);
+		ModLoader.RegisterBlock(AelythSand);
 		ModLoader.RegisterBlock(DestroyedStone);
 	}
 	
@@ -38,15 +41,15 @@ public class mod_Aelyth extends BaseMod
 	
 	public void setupName()
 	{
-		ModLoader.AddName(ObliviousDirt, "Oblivious Dirt");
-		ModLoader.AddName(ObliviousGrass, "Oblivious Grass");
-		ModLoader.AddName(ObliviousLog, "Oblivious Log");
-		ModLoader.AddName(ObliviousWood, "Oblivious Wood");
-		ModLoader.AddName(ObliviousStone, "Oblivious Stone");
-		ModLoader.AddName(ObliviousCobble, "Oblivious Cobblestone");
-	    ModLoader.AddName(ObliviousSand, "Oblivious Sand");
+		ModLoader.AddName(AelythDirt, "Aelyth Dirt");
+		ModLoader.AddName(AelythGrass, "Aelyth Grass");
+		ModLoader.AddName(AelythLog, "Aelyth Log");
+		ModLoader.AddName(AelythWood, "Aelyth Wood");
+		ModLoader.AddName(AelythStone, "Aelyth Stone");
+		ModLoader.AddName(AelythCobble, "Aelyth Cobblestone");
+	    ModLoader.AddName(AelythSand, "Aelyth Sand");
 	    ModLoader.AddName(DestroyedStone, "Destroyed Stone");
-	    ModLoader.AddName(ObliviousStick, "Oblivious Stick");
+	    ModLoader.AddName(AelythStick, "Aelyth Stick");
 	    
 	}
 	
@@ -54,68 +57,76 @@ public class mod_Aelyth extends BaseMod
 	
 	public void setupTexture()
 	{
-		ObliviousDirtTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousDirt.png");
-		ObliviousGrassTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousGrass.png");
-		ObliviousLogTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousLog.png");
-		ObliviousWoodTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousWood.png");
-		ObliviousStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousStone.png");
-		ObliviousCobbleTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousCobble.png");
-		ObliviousSandTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousSand.png");
+	/*	AelythDirtTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythDirt.png");
+		AelythGrassTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythGrass.png");
+		AelythLogTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythLog.png");
+		AelythWoodTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythWood.png");
+		AelythStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythStone.png");
+		AelythCobbleTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythCobble.png");
+		AelythSandTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythSand.png");
 		DestroyedStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/DestroyedStone.png");
-		ObliviousStickTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/ObliviousStickTexture.png");
-		
+		AelythStickTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythStickTexture.png");
+	*/
 	}
 	
 	
 	
 	public void AddRecipe()
 	{
-		ModLoader.AddRecipe(new ItemStack(ObliviousWood, 4), new Object[]
-				{"#", Character.valueOf('#'), ObliviousLog});
-		ModLoader.AddRecipe(new ItemStack(ObliviousStick, 2), new Object[]
-				{"#", "#", Character.valueOf('#'), ObliviousWood});
+		ModLoader.AddRecipe(new ItemStack(AelythWood, 4), new Object[]
+				{"#", Character.valueOf('#'), AelythLog});
+		
+		ModLoader.AddRecipe(new ItemStack(AelythStick, 2), new Object[]
+				{"#", "#", Character.valueOf('#'), AelythWood});
+	}
+	
+	public void GenerateSurface(World world, Random rand, int chunkX, int chunkZ)
+	{
+			int randPosX = chunkX + rand.nextInt(16);
+		    int randPosY = rand.nextInt(20) + 70;
+		    int randPosZ = chunkZ + rand.nextInt(16);
+		    (new WorldGenShard()).generate(world, rand, randPosX, randPosY, randPosZ);
 	}
 	
 	
-	
-	public static final Block ObliviousDirt = (new BlockObliviousDirt(100, ObliviousDirtTexture))
+	public static final Block AelythDirt = (new BlockAelythDirt(100, AelythDirtTexture))
 													.setHardness(0.6F)
 													.setStepSound(Block.soundGravelFootstep)
-													.setBlockName("obliviousdirt");
+													.setBlockName("Aelythdirt");
 	
-	public static final Block ObliviousGrass = (new BlockObliviousGrass(101, ObliviousGrassTexture))
+	public static final Block AelythGrass = (new BlockAelythGrass(101, AelythGrassTexture))
 													.setHardness(0.7F)
 													.setStepSound(Block.soundGrassFootstep)
-													.setBlockName("obliviousgrass");
+													.setBlockName("Aelythgrass");
 	
-	public static final Block ObliviousLog = (new BlockObliviousLog(102, ObliviousLogTexture))
+	public static final Block AelythLog = (new BlockAelythLog(102, AelythLogTexture))
 													.setHardness(2.0F)
 													.setStepSound(Block.soundWoodFootstep)
-													.setBlockName("obliviouslog");
+													.setBlockName("Aelythlog");
 	
-	public static final Block ObliviousWood = (new BlockObliviousWood(103, ObliviousWoodTexture))
+	public static final Block AelythWood = (new BlockAelythWood(103, AelythWoodTexture))
 													.setHardness(2.0F)
 													.setResistance(5F)
 													.setStepSound(Block.soundWoodFootstep)
-													.setBlockName("obliviouslog");
+													.setBlockName("Aelythlog");
 	
-	public static final Block ObliviousStone = (new BlockObliviousStone(104, ObliviousStoneTexture))
+	public static final Block AelythStone = (new BlockAelythStone(104, AelythStoneTexture))
 													.setHardness(2.0F)
 													.setResistance(10F)
 													.setStepSound(Block.soundStoneFootstep)
-													.setBlockName("obliviousstone");
+													.setBlockName("Aelythstone");
 	
-	public static final Block ObliviousCobble = (new BlockObliviousCobble(105, ObliviousCobbleTexture))
+	public static final Block AelythCobble = (new BlockAelythCobble(105, AelythCobbleTexture))
 													.setHardness(1.8F)
 													.setResistance(8F)
 													.setStepSound(Block.soundStoneFootstep)
-													.setBlockName("obliviouscobble");
+													.setBlockName("Aelythcobble");
 													
-	public static final Block ObliviousSand = (new BlockObliviousSand(106, ObliviousSandTexture))
+	public static final Block AelythSand = (new BlockAelythSand(106, AelythSandTexture))
 													.setHardness(0.5F)
 													.setResistance(8F)
 													.setStepSound(Block.soundSandFootstep)
-													.setBlockName("oblivioussand");	
+													.setBlockName("Aelythsand");	
 
 	public static final Block DestroyedStone = (new BlockDestroyedStone(107, DestroyedStoneTexture))
 													.setHardness(1.8F)
@@ -125,9 +136,7 @@ public class mod_Aelyth extends BaseMod
 	
 	
 	
-	public static Item ObliviousStick = (new ItemObliviousStick(5000)).setIconIndex(ObliviousStickTexture).setItemName("obliviousstick");
-	
-	
+	public static Item AelythStick = (new ItemAelythStick(5000)).setIconIndex(AelythStickTexture).setItemName("Aelythstick");
 	
 	public String Version()
 	{

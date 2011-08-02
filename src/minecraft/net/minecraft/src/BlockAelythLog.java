@@ -2,17 +2,15 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class BlockObliviousWood extends Block
+public class BlockAelythLog extends Block
 {
-	
-    public BlockObliviousWood(int i, int j)
+    public BlockAelythLog(int i, int j)
     {
         super(i, j, Material.wood);
     }
     
     public int idDropped(int i, Random random)
     {
-        return mod_Aelyth.ObliviousWood.blockID;
+        return mod_Aelyth.AelythLog.blockID;
     }
-    
 }
