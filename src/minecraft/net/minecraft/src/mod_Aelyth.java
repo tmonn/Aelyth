@@ -82,10 +82,10 @@ public class mod_Aelyth extends BaseMod
 	
 	public void GenerateSurface(World world, Random rand, int chunkX, int chunkZ)
 	{
-			int randPosX = chunkX + rand.nextInt(16);
-		    int randPosY = rand.nextInt(20) + 50;
-		    int randPosZ = chunkZ + rand.nextInt(16);
-		    (new WorldGenShard()).generate(world, rand, randPosX, randPosY, randPosZ);
+		int randPosX = chunkX + rand.nextInt(16);
+		int randPosY = rand.nextInt(20) + 50;
+		int randPosZ = chunkZ + rand.nextInt(16);
+		(new WorldGenShard()).generate(world, rand, randPosX, randPosY, randPosZ);
 	}
 	
 	
