@@ -18,6 +18,12 @@ public class WorldGenShard extends WorldGenerator
 
 	public boolean generate(World world, Random random, int i, int j, int k) 
 	{
+		/*
+		 * ==================SON D'EXPLOSION=================== 
+		 */
+		
+		//world.playSoundEffect((double) i, (double) j, (double) k, "random.explode", 10.0F, 0.6F);
+		
 		
 		int longueurReel = 5;
 		int hauteurReel = 5;
@@ -61,6 +67,28 @@ public class WorldGenShard extends WorldGenerator
 	    ItemStack item = new ItemStack(Item.diamond, 1);
         tileentitychest.setInventorySlotContents(random.nextInt(tileentitychest.getSizeInventory()), item);
 		
+        /*
+		 * ==================SPAWN DU FEU=================== 
+		 */
+		
+        for(int largFeu = i; largFeu < i + 20; largFeu++)
+        {
+        	for(int hautFeu = j; hautFeu < j + 20; hautFeu++)
+        	{
+        		for(int longFeu = k; longFeu < k + 20; longFeu++)
+        		{
+        			if(random.nextInt(50) == 0)
+        			{
+        				int ID = world.getBlockId(largFeu, hautFeu, longFeu);
+        				if((ID == 0 || ID == Block.leaves.blockID) && world.getBlockId(largFeu, hautFeu - 1, longFeu) != 0)
+        				{
+        					world.setBlockWithNotify(largFeu, hautFeu, longFeu, Block.fire.blockID);
+        				}
+        			}
+        		}
+        	}
+        }
+        
 		return true;
 	}
 }
