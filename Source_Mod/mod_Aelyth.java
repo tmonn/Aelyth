@@ -11,8 +11,6 @@ public class mod_Aelyth extends BaseMod
 	public static int AelythWoodTexture;
 	public static int AelythStoneTexture;
 	public static int AelythCobbleTexture;
-    public static int AelythSandTexture;
-    public static int DestroyedStoneTexture;
     public static int AelythStickTexture;
 
 	public mod_Aelyth()
@@ -33,8 +31,6 @@ public class mod_Aelyth extends BaseMod
 		ModLoader.RegisterBlock(AelythWood);
 		ModLoader.RegisterBlock(AelythStone);
 		ModLoader.RegisterBlock(AelythCobble);
-		ModLoader.RegisterBlock(AelythSand);
-		ModLoader.RegisterBlock(DestroyedStone);
 	}
 	
 	
@@ -47,10 +43,7 @@ public class mod_Aelyth extends BaseMod
 		ModLoader.AddName(AelythWood, "Aelyth Wood");
 		ModLoader.AddName(AelythStone, "Aelyth Stone");
 		ModLoader.AddName(AelythCobble, "Aelyth Cobblestone");
-	    ModLoader.AddName(AelythSand, "Aelyth Sand");
-	    ModLoader.AddName(DestroyedStone, "Destroyed Stone");
-	    ModLoader.AddName(AelythStick, "Aelyth Stick");
-	    
+	    ModLoader.AddName(AelythSand, "Aelyth Sand");	    
 	}
 	
 	
@@ -64,7 +57,6 @@ public class mod_Aelyth extends BaseMod
 		AelythStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythStone.png");
 		AelythCobbleTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythCobble.png");
 		AelythSandTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythSand.png");
-		DestroyedStoneTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/DestroyedStone.png");
 		AelythStickTexture = ModLoader.addOverride("/terrain.png", "/Aelyth/AelythStickTexture.png");
 	*/
 	}
@@ -126,13 +118,7 @@ public class mod_Aelyth extends BaseMod
 													.setHardness(0.5F)
 													.setResistance(8F)
 													.setStepSound(Block.soundSandFootstep)
-													.setBlockName("Aelythsand");	
-
-	public static final Block DestroyedStone = (new BlockDestroyedStone(107, DestroyedStoneTexture))
-													.setHardness(1.8F)
-													.setResistance(8F)
-													.setStepSound(Block.soundStoneFootstep)
-													.setBlockName("destroyedstone");
+													.setBlockName("Aelythsand");
 	
 	
 	
