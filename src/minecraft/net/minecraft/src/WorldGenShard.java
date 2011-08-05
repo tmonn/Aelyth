@@ -5,19 +5,32 @@ import java.util.Random;
 
 /* =============BUGS=============
  * 
- * Les panneaux ce générent contre le mauvais mur
+ * Bugs des emplacements où le Shard se génére (en l'air ou incrusté dans le sol)
+ * 
+ * Apparemment quelques bugs pour les blocs aléatoires sur le shard
+ * 
+ * spawn de l'herbe à revoir
  * 
  */
 
 
 public class WorldGenShard extends WorldGenerator 
-{
+{	
 	public WorldGenShard()
 	{
 	}
 
 	public boolean generate(World world, Random random, int i, int j, int k) 
-	{
+	{	
+		
+		if(!canGenerate(world, random, i, j, k))
+			return false;
+		
+		int dirt = mod_Aelyth.AelythDirt.blockID;
+		int stone = mod_Aelyth.AelythStone.blockID;
+		int cobble = mod_Aelyth.AelythCobble.blockID;
+		int grass = mod_Aelyth.AelythGrass.blockID;
+		
 		/*
 		 * ==================SON D'EXPLOSION=================== 
 		 */
@@ -25,48 +38,101 @@ public class WorldGenShard extends WorldGenerator
 		//world.playSoundEffect((double) i, (double) j, (double) k, "random.explode", 10.0F, 0.6F);
 		
 		
-		int longueurReel = 5;
-		int hauteurReel = 5;
-		int largeurReel = 5;
-		
 		/*
-		 * ==================GENERATION CUBE=================== 
+		 * ==================GENERATION SHARD=================== 
 		 */
-		for(int longueur = i; longueur < i + longueurReel; longueur++)//axe x
+		
+		for(int larg = i; larg < i + 7; larg++)
 		{
-			for(int hauteur = j; hauteur < j + hauteurReel; hauteur++)//axe y
+			for(int lon = k; lon < k + 8; lon++)
 			{
-				for(int largeur = k; largeur < k + largeurReel; largeur++)//axe z
-				{ 
-					world.setBlock(longueur, hauteur, largeur, mod_Aelyth.AelythDirt.blockID);   	
-				}
+				world.setBlockWithNotify(larg, j, lon, dirt);
 			}
 		}
 		
-		/*
-		 * ==================VIDAGE CUBE=================== 
-		 */
+		for(int k1 = k + 2; k1 < k + 5; k1++)
+			for(int i1 = i + 1; i1 < i + 6; i1++)
+				world.setBlockWithNotify(i1, j + 1, k1, stone);
 		
-		for(int longVide = i + 1; longVide < i + longueurReel - 1; longVide++)
+		
+		world.setBlockWithNotify(i + 2, j + 1, k + 5, stone);
+		world.setBlockWithNotify(i + 3, j + 1, k + 5, stone);		
+		world.setBlockWithNotify(i + 4, j + 1, k + 5, stone);
+		world.setBlockWithNotify(i + 3, j + 1, k + 6, stone);
+		
+		
+		for(int k1 = k + 2; k1 < k + 4; k1++)
 		{
-			for(int hautVide = j + 1; hautVide < j + hauteurReel - 1; hautVide++)
+			for(int j1 = j + 2; j1 < j + 4; j1++)
 			{
-				for(int largVide = k + 1; largVide < k + largeurReel - 1; largVide++)
-				{
-					world.setBlockWithNotify(longVide, hautVide, largVide, 0);
-				}
+				world.setBlockWithNotify(i + 2, j1, k1, stone);
+				world.setBlockWithNotify(i + 4, j1, k1, stone);
 			}
 		}
+		
+		world.setBlockWithNotify(i + 3, j + 4, k + 2, stone);
+		world.setBlockWithNotify(i + 3, j + 4, k + 3, stone);
+		world.setBlockWithNotify(i + 3, j + 3, k + 4, stone);
+		world.setBlockWithNotify(i + 3, j + 2, k + 5, stone);
+		
+		for(int i1 = i + 2; i1 < i + 5; i1++)
+			world.setBlockWithNotify(i1, j + 2, k + 4, stone);
+		
+		
+		world.setBlockWithNotify(i + 1, j + 2, k + 2, stone);
+		world.setBlockWithNotify(i + 5, j + 2, k + 2, stone);
 		
 		/*
 		 * ==================PLACEMENT COFFRE + UN DIAMAND=================== 
-		 */
+	     */
 		
-	    world.setBlock(i + 1, j + 1, k + 2, Block.chest.blockID); 
-	    TileEntityChest tileentitychest = (TileEntityChest)world.getBlockTileEntity(i + 1, j + 1, k + 2);
+	    world.setBlock(i + 3, j + 2, k + 3, Block.chest.blockID); 
+	    TileEntityChest tileentitychest = (TileEntityChest)world.getBlockTileEntity(i + 3, j + 2, k + 3);
 	    ItemStack item = new ItemStack(Item.diamond, 1);
         tileentitychest.setInventorySlotContents(random.nextInt(tileentitychest.getSizeInventory()), item);
 		
+        
+		/*
+		 * ==================BLOCS ALEATOIRES SUR LE SHARD=================== 
+	     */
+        
+        for(int i1 = i; i1 < i + 7; i1++)
+        {
+        	for(int j1 = j + 1; j1 < j + 4; j1++)
+        	{
+        		for(int k1 = k; k1 < k + 8; k1++)
+        		{
+        			if(world.getBlockId(i1, j1 - 1, k1) != 0 && random.nextInt(20) == 0)
+        			{
+        				world.setBlockWithNotify(i1, j1, k1, random.nextInt(4)== 0 ? cobble : stone);
+        			}
+        		}
+        	}
+        }
+        
+		
+		/*
+		 * ==================GRASS ALEATOIRE AUTOUR DU SHARD=================== 
+	     */
+        int centreI = i + 3;
+        int centreK = k + 4;
+        
+        for(int i1 = i - 10; i1 < i + 17; i1++)
+        {
+        	for(int j1 = j; j1 < j + 2; j1++)
+        	{
+        		for(int k1 = k - 10; k1 < k + 18; k1++)
+        		{
+        			if(world.getBlockId(i1, j1, k1) == Block.grass.blockID && random.nextInt(Math.abs(centreK)) == 0)
+        			{
+        				world.setBlockWithNotify(i1, j1, k1, grass);
+        			}
+        		}
+        	}
+        }
+        
+        
+        
         /*
 		 * ==================SPAWN DU FEU=================== 
 		 */
@@ -88,111 +154,23 @@ public class WorldGenShard extends WorldGenerator
         		}
         	}
         }
-        
-        // i = axe x
-        // j = axe y
-        // k = axe z
-        
-        /*
-		 * ==================FEU INTERIEUR + PORTE=================== 
-		 */
-        
-        world.setBlockWithNotify(i + 1, j, k + 1, Block.netherrack.blockID);
-        world.setBlockWithNotify(i + 2, j, k + 1, Block.netherrack.blockID);
-        world.setBlockWithNotify(i + 3, j, k + 1, Block.netherrack.blockID);
-        world.setBlockWithNotify(i + 1, j, k + 3, Block.netherrack.blockID);
-        world.setBlockWithNotify(i + 2, j, k + 3, Block.netherrack.blockID);
-        world.setBlockWithNotify(i + 3, j, k + 3, Block.netherrack.blockID);
-        
-        world.setBlockWithNotify(i + 1, j + 1, k + 1, Block.fire.blockID);
-        world.setBlockWithNotify(i + 2, j + 1, k + 1, Block.fire.blockID);
-        world.setBlockWithNotify(i + 3, j + 1, k + 1, Block.fire.blockID);
-        world.setBlockWithNotify(i + 1, j + 1, k + 3, Block.fire.blockID);
-        world.setBlockWithNotify(i + 2, j + 1, k + 3, Block.fire.blockID);
-        world.setBlockWithNotify(i + 3, j + 1, k + 3, Block.fire.blockID);
-        
-        world.setBlockWithNotify(i + 4, j + 1, k + 2, 0);
-        world.setBlockWithNotify(i + 4, j + 2, k + 2, 0);
-        
-        
-        /*
-		 * ==================FACONNAGE SHARD=================== 
-		 */
-        
-        
-        world.setBlockWithNotify(i + 4, j + 3, k + 4, 0);
-        world.setBlockWithNotify(i + 4, j + 4, k + 4, 0);
-        world.setBlockWithNotify(i + 4, j + 3, k, 0);
-        world.setBlockWithNotify(i + 4, j + 4, k, 0);
-        world.setBlockWithNotify(i + 4, j + 4, k + 1, 0);
-        world.setBlockWithNotify(i + 4, j + 4, k + 3, 0);
-        
-        world.setBlockWithNotify(i + 3, j + 3, k + 4, 0);
-        world.setBlockWithNotify(i + 3, j + 4, k + 4, 0);
-        world.setBlockWithNotify(i + 3, j + 3, k, 0);
-        world.setBlockWithNotify(i + 3, j + 4, k, 0);
-        world.setBlockWithNotify(i + 3, j + 4, k + 1, 0);
-        world.setBlockWithNotify(i + 3, j + 4, k + 3, 0);
-        
-        world.setBlockWithNotify(i + 2, j + 3, k + 4, 0);
-        world.setBlockWithNotify(i + 2, j + 4, k + 4, 0);
-        world.setBlockWithNotify(i + 2, j + 3, k, 0);
-        world.setBlockWithNotify(i + 2, j + 4, k, 0);
-        world.setBlockWithNotify(i + 2, j + 4, k + 1, 0);
-        world.setBlockWithNotify(i + 2, j + 4, k + 3, 0);
-        
-        world.setBlockWithNotify(i + 1, j + 3, k + 4, 0);
-        world.setBlockWithNotify(i + 1, j + 4, k + 4, 0);
-        world.setBlockWithNotify(i + 1, j + 3, k, 0);
-        world.setBlockWithNotify(i + 1, j + 4, k, 0);
-        world.setBlockWithNotify(i + 1, j + 4, k + 1, 0);
-        world.setBlockWithNotify(i + 1, j + 4, k + 3, 0);
-        
-        world.setBlockWithNotify(i, j + 3, k + 4, 0);
-        world.setBlockWithNotify(i, j + 4, k + 4, 0);
-        world.setBlockWithNotify(i, j + 3, k, 0);
-        world.setBlockWithNotify(i, j + 4, k, 0);
-        world.setBlockWithNotify(i, j + 4, k + 1, 0);
-        world.setBlockWithNotify(i, j + 4, k + 3, 0);
-        
-        world.setBlockWithNotify(i + 3, j + 3, k + 1, mod_Aelyth.AelythDirt.blockID);
-        world.setBlockWithNotify(i + 3, j + 3, k + 3, mod_Aelyth.AelythDirt.blockID);
-        
-        world.setBlockWithNotify(i + 2, j + 3, k + 1, mod_Aelyth.AelythDirt.blockID);
-        world.setBlockWithNotify(i + 2, j + 3, k + 3, mod_Aelyth.AelythDirt.blockID);
-        
-        world.setBlockWithNotify(i + 1, j + 3, k + 1, mod_Aelyth.AelythDirt.blockID);
-        world.setBlockWithNotify(i + 1, j + 3, k + 3, mod_Aelyth.AelythDirt.blockID);
-
-        world.setBlockWithNotify(i, j + 3, k + 1, mod_Aelyth.AelythDirt.blockID);
-        world.setBlockWithNotify(i, j + 3, k + 3, mod_Aelyth.AelythDirt.blockID);
-        
-        world.setBlockWithNotify(i, j, k, 0);
-        world.setBlockWithNotify(i, j, k + 4, 0);
-
-        world.setBlockWithNotify(i + 1, j, k, 0);
-        world.setBlockWithNotify(i + 1, j, k + 4, 0);
-        
-        world.setBlockWithNotify(i + 2, j, k, 0);
-        world.setBlockWithNotify(i + 2, j, k + 4, 0);
-        
-        world.setBlockWithNotify(i + 3, j, k, 0);
-        world.setBlockWithNotify(i + 3, j, k + 4, 0);
-        
-        world.setBlockWithNotify(i + 4, j, k, 0);
-        world.setBlockWithNotify(i + 4, j, k + 4, 0);
-        
-        
-//        world.setBlock(i + 1, j + 3, k + 2, Block.signWall.blockID); 
-//	    TileEntitySign tileentitysign = (TileEntitySign)world.getBlockTileEntity(i + 1, j + 3, k + 2);
-//	    
-//        world.setBlock(i + 1, j + 2, k + 2, Block.signWall.blockID); 
-//	    TileEntitySign tileentitysign2 = (TileEntitySign)world.getBlockTileEntity(i + 1, j + 2, k + 2);
-//	    
-//        tileentitysign.signText = new String[] {"Bravo jeune", "pomme, tu viens", "de découvrir", "l'objet qui"};
-//        tileentitysign.signText = new String[] {"va te", "permettre", "d'acceder à", "l'Aelyth !"};
-        
-        
 		return true;
 	}
+	
+    public boolean canGenerate(World world, Random rand, int i, int j, int k)
+    {
+    	for(int i1 = i; i1 < i + 7; i1++)
+    	{
+    		for(int k1 = k; k1 < k + 8; k1++)
+    		{
+    			if(world.getBlockId(i1, j, k1) == 0 && world.getBlockId(i1, j, k1) != 0)
+    			{
+    				return false;
+    			}
+    		}
+    	}
+    	
+    	return true;
+    }
+
 }
